@@ -2,16 +2,16 @@ Gem::Specification.new do |s|
   s.name          = 'logstash-output-mysql_metrics'
   s.version       = '0.1.0'
   s.licenses      = ['Apache-2.0']
-  s.summary       = 'Logstash Output Plugin for MysqlMetrics'
-  s.description   = 'TODO: Write a longer description or delete this line.'
-  s.homepage      = 'TODO: Put your plugin''s website or public repo URL here.'
-  s.authors       = ['your_username']
-  s.email         = 'your_username@example.com'
+  s.summary       = 'Logstash Output Plugin for MySQL Metrics'
+  s.description   = 'This plugin logs metrics about MySQL pipeline processing to a specified file, enabling further processing or visualization of these metrics outside of Logstash.'
+  s.homepage      = 'http://example.com/logstash-output-mysql_metrics'
+  s.authors       = ['Your Name']
+  s.email         = 'your_email@example.com'
   s.require_paths = ['lib']
 
   # Files
   s.files = Dir['lib/**/*','spec/**/*','vendor/**/*','*.gemspec','*.md','CONTRIBUTORS','Gemfile','LICENSE','NOTICE.TXT']
-   # Tests
+  # Tests
   s.test_files = s.files.grep(%r{^(test|spec|features)/})
 
   # Special flag to let us know this is actually a logstash plugin

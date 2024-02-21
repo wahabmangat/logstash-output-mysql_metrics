@@ -2,13 +2,14 @@
 require 'logstash/outputs/base'
 require 'logstash/namespace'
 require 'fileutils'
+require 'json'
+
 
 class LogStash::Outputs::MysqlMetrics < LogStash::Outputs::Base
-  config_name 'mysqlMetrics'
+  config_name 'mysql_metrics'
 
-  # Configuration options
   config :pipeline_name, :validate => :string
-  config :metrics_log_path, :validate => :string  # Path to the file where metrics will be logged
+  config :metrics_log_path, :validate => :string  
 
   public
   def register
@@ -22,17 +23,24 @@ class LogStash::Outputs::MysqlMetrics < LogStash::Outputs::Base
     # Ensure the log directory exists
     FileUtils.mkdir_p(File.dirname(@metrics_log_path))
     @metrics_file = File.open(@metrics_log_path, "a")
+    @is_first_batch = false;
   end
 
   public
   def multi_receive(events)
     @mutex.synchronize do
+      unless @is_first_batch
+        sleep 1 
+        @is_first_batch = true
+      end
       @start_time ||= Time.now # Set start time with the first batch
       @stop_time = Time.now     # Always update end time with the current batch
     end
   
     # Thread-safe increment of document count
-    @mutex.synchronize { @document_count += events.size }
+    @mutex.synchronize do
+      @document_count += events.size
+    end
     events.each do |event|
       begin
         # Placeholder for actual event processing logic

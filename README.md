@@ -14,6 +14,8 @@ bin/logstash-plugin install logstash-output-mysql_metrics
 
 ## Configuration
 
+The logstash-output-mysql_metrics plugin allows for flexible configuration to monitor multiple MySQL pipelines. Configure each pipeline with a unique instance of the plugin in your Logstash configuration file, specifying distinct pipeline_name and metrics_log_path for each
+
 Here's an example configuration for the plugin within your Logstash pipeline:
 
 ```ruby
@@ -48,6 +50,16 @@ Need help? Try #logstash on freenode IRC or the https://discuss.elastic.co/c/log
 ## Developing
 
 ### Prerequisites
+
+This plugin is developed and tested with the following environments:
+
+#### JRuby
+
+version: 9.4.5.0 (3.1.4) - Ensure JRuby is installed on your system. For installation instructions, visit JRuby's official documentation.
+
+#### Logstash
+
+version: 8.11.0 - This plugin is compatible with Logstash 8.11.0. Ensure you have this version installed. For Logstash installation guidelines, refer to the official Logstash documentation.
 
 #### JRuby:
 
